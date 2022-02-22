@@ -14,3 +14,7 @@ ansible_ssh_common_args='-o ProxyCommand="ssh -o StrictHostKeyChecking=no -o Use
 
 [all:vars]
 admin_email=valtri@civ.zcu.cz
+# keep in sync with:
+#  * docker-compose-restodb.yml
+#  * docker-compose.yml
+mtu=1442

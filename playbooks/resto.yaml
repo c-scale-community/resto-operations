@@ -1,0 +1,47 @@
+---
+- hosts: resto
+  tasks:
+    - name: Install docker
+      package:
+        name:
+          - docker.io
+          - docker-compose
+          - postgresql-client
+    - name: Config docker MTU
+      copy:
+        dest: /etc/docker/daemon.json
+        content: |
+          {
+            "mtu": {{ mtu }}
+          }
+      notify: Reload docker
+    - name: Git checkout
+      git:
+        # https://github.com/jjrom/resto, master
+        repo: https://github.com/valtri/resto
+        dest: /root/resto-git
+        clone: yes
+        update: no
+        version: cesnet
+    - name: Config
+      vars:
+        config:
+          PUBLIC_ENDPOINT: "http://{{ groups['fip'][0] }}:5252"
+          ADMIN_USER_PASSWORD: "{{ lookup('file', '../secret-admin-password.txt') }}"
+          JWT_PASSPHRASE: "{{ lookup('file', '../secret-jwt-passphrase.txt') }}"
+          SENDMAIL_SMTP_ACTIVATE: "true"
+      lineinfile:
+        path: /root/resto-git/config.env
+        regexp: '^[ #]*{{ item.key }}\s*=.*'
+        line: "{{ item.key }}=\"{{ item.value }}\""
+      loop: "{{ config | dict2items }}"
+      notify: Reconfigure resto
+
+  handlers:
+    - name: Reconfigure resto
+      debug:
+        msg: "Launch manually: cd ~/resto-git && ./deploy prod"
+    - name: Reload docker
+      service:
+        name: docker
+        state: restarted

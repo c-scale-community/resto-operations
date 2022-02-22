@@ -1,2 +1,3 @@
 ---
 - import_playbook: playbooks/system.yaml
+- import_playbook: playbooks/resto.yaml
