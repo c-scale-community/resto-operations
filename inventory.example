@@ -1,0 +1,13 @@
+[local]
+192.168.2.49
+
+[fip]
+147.251.124.35
+
+[local:vars]
+ansible_become=yes
+ansible_user=ubuntu
+ansible_ssh_common_args='-o ProxyCommand="ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -W %h:%p -q ubuntu@{{ groups["fip"][0] }}" -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null'
+
+[all:vars]
+admin_email=valtri@civ.zcu.cz

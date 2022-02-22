@@ -1,0 +1,50 @@
+---
+- hosts: local
+  become: true
+  tasks:
+    - name: Site install packages
+      package:
+        name:
+          - cron-apt
+          - fail2ban
+          - less
+          - mailutils
+          - net-tools
+          - vim
+          - postfix
+    - name: Site remove packages
+      package:
+        name:
+          - unattended-upgrades
+        state: absent
+    - name: Site cron-apt config
+      copy:
+        dest: /etc/cron-apt/config
+        content: |
+          MAILTO={{ admin_email }}
+          MAILON=upgrade
+          RUNSLEEP=600
+        mode: 0644
+    - name: Site cron-apt action
+      copy:
+        dest: /etc/cron-apt/action.d/9-upgrade
+        content: -q -q dist-upgrade
+        mode: 0644
+    - name: Site setup postfix
+      vars:
+        main:
+          myhostname: "{{ lookup('dig', groups['fip'][0] + '/PTR') | regex_replace('\\.$', '') }}"
+          relayhost: relay.muni.cz
+          inet_protocols: ipv4
+      lineinfile:
+        regexp: '^{{ item.key }}\s*=\s*.*'
+        line: "{{ item.key }} = {{ item.value }}"
+        path: /etc/postfix/main.cf
+      loop: "{{ main | dict2items }}"
+      notify: Reload postfix
+
+  handlers:
+    - name: Reload postfix
+      service:
+        name: postfix
+        state: reloaded
