@@ -7,4 +7,4 @@ Stept (control machine):
 
     cp inventory.example inventory
     apt-get install -y python3-dnspython
-    ansible-playbook -i ./inventory ./site.yaml
+    ansible-playbook ./site.yaml

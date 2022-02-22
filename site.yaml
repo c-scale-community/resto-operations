@@ -1,2 +1,2 @@
 ---
-- import_playbook: system.yaml
+- import_playbook: playbooks/system.yaml
