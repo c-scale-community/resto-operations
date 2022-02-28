@@ -25,11 +25,18 @@
         version: cesnet
     - name: Config
       vars:
+        fip_hostname: "{{ lookup('dig', groups['fip'][0] + '/PTR') | regex_replace('\\.$', '') }}"
+        endpoint_hostname: "{{ public_hostname | default(fip_hostname) }}"
         config:
-          PUBLIC_ENDPOINT: "http://{{ groups['fip'][0] }}:5252"
+          PUBLIC_ENDPOINT: "http://{{ endpoint_hostname }}:5252"
           ADMIN_USER_PASSWORD: "{{ lookup('file', '../secret-admin-password.txt') }}"
           JWT_PASSPHRASE: "{{ lookup('file', '../secret-jwt-passphrase.txt') }}"
           SENDMAIL_SMTP_ACTIVATE: "true"
+          SENDMAIL_SENDER_EMAIL: "noreply@{{ fip_hostname }}"
+          SENDMAIL_SMTP_HOST: "{{ smtp_host }}"
+          SENDMAIL_SMTP_PORT: "{{ smtp_port }}"
+          SENDMAIL_SMTP_SECURE: ""
+          SENDMAIL_SMTP_DEBUG: "1"
       lineinfile:
         path: /root/resto-git/config.env
         regexp: '^[ #]*{{ item.key }}\s*=.*'

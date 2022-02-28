@@ -13,8 +13,18 @@ ansible_user=ubuntu
 ansible_ssh_common_args='-o ProxyCommand="ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -W %h:%p -q ubuntu@{{ groups["fip"][0] }}" -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null'
 
 [all:vars]
+
 admin_email=valtri@civ.zcu.cz
+
 # keep in sync with:
 #  * docker-compose-restodb.yml
 #  * docker-compose.yml
 mtu=1442
+
+# default: fip hostname from DNS
+# public_hostname=
+
+# docker network inspect -f '{{.IPAM.Config}}' resto_default
+smtp_network=172.19.0.0/16
+smtp_host=172.19.0.1
+smtp_port=25
