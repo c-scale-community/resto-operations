@@ -37,6 +37,7 @@
               SENDMAIL_SENDER_EMAIL: "noreply@{{ fip_hostname }}"
               SENDMAIL_SMTP_HOST: "{{ smtp_host }}"
               SENDMAIL_SMTP_PORT: "{{ smtp_port }}"
+              # problem with CA certificates in containers (requires changes in resto app)
               SENDMAIL_SMTP_SECURE: "none"
           lineinfile:
             path: /root/resto-git/config.env

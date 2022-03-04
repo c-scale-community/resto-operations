@@ -37,6 +37,8 @@
           mynetworks: "127.0.0.0/8 [::ffff:127.0.0.0]/104 [::1]/128 {{ smtp_network }}"
           relayhost: relay.muni.cz
           inet_protocols: ipv4
+          # problem with CA certificates in containers (requires changes in resto app)
+          smtpd_tls_security_level: none
       lineinfile:
         regexp: '^{{ item.key }}\s*=\s*.*'
         line: "{{ item.key }} = {{ item.value }}"
