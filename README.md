@@ -29,3 +29,11 @@ Create user:
     }
     EOF
     curl -i -X POST "$endpoint/users" -H 'Content-Type: application/json' -H 'Accept: application/json' -d @$(pwd)/user.json
+
+    token="$(curl -i -X GET -u EMAIL@example.com:PASSWOD "$endpoint/auth" -H 'Accept: application/json' | jq -r .token)"
+
+    curl -i -X PUT "$endpoint/auth/activate/$token" -H 'Accept: application/json'
+
+Complete cleanup of all users:
+
+    docker exec -it resto_restodb_1 psql -U resto resto -c "DELETE FROM \"user\" WHERE email!='admin'"
