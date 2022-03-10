@@ -14,3 +14,11 @@
         clone: yes
         update: no
         version: cesnet
+# TODO: install database modules
+# read PGPASSWORD
+# PGPASSWORD="$PGPASSWORD" createdb resto
+# PGPASSWORD="$PGPASSWORD" psql -X -v ON_ERROR_STOP=1 -d resto -f ./build/resto-database/sql/00_resto_extensions.sql
+#
+# createuser -P resto
+# GRANT CREATE ON DATABASE resto TO resto;
+# GRANT INSERT ON TABLE SPATIAL_REF_SYS TO resto;

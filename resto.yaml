@@ -35,6 +35,7 @@
               ACTIVATE_USER_ENDPOINT: "http://{{ endpoint_hostname }}:5252/activate/{:token:}"
               ADMIN_USER_PASSWORD: "{{ secret_admin_password }}"
               DATABASE_HOST: "{{ groups['resto-db'][0] }}"
+              DATABASE_USER_PASSWORD: "{{ secret_db_password | default('resto') }}"
               JWT_PASSPHRASE: "{{ secret_jwt_passphrase }}"
               PUBLIC_ENDPOINT: "http://{{ endpoint_hostname }}:5252"
               RESET_PASSWORD_ENDPOINT: "http://{{ endpoint_hostname }}:5252/resetPassword/{:token:}"

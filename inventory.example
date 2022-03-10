@@ -30,4 +30,5 @@ smtp_host=172.19.0.1
 smtp_port=25
 
 secret_admin_password='good.password'
+secret_db_password='resto'
 secret_jwt_passphrase='good.passphrase'
