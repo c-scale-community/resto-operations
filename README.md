@@ -7,9 +7,8 @@ Steps (control machine):
 
     apt-get install -y python3-dnspython
     cp inventory.example inventory
-    echo "good-password" > secret-admin-password.txt
-    echo "good-passprase" > secret-jwt-passphrase.txt
-    chmod 0600 secret-*.txt
+    # modify
+    #vim inventory
     ansible-playbook ./site.yaml
 
 Create user:

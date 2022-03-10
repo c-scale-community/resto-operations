@@ -28,3 +28,6 @@ mtu=1442
 smtp_network=172.19.0.0/16
 smtp_host=172.19.0.1
 smtp_port=25
+
+secret_admin_password='good.password'
+secret_jwt_passphrase='good.passphrase'
