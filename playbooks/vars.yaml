@@ -1,0 +1,2 @@
+---
+fip_hostname: "{{ lookup('dig', groups['fip'][0] + '/PTR') | regex_replace('\\.$', '') }}"

@@ -1,7 +1,11 @@
 ---
 - hosts: resto
+
+  vars_files:
+    - playbooks/vars.yaml
+
   tasks:
-    - name: Install docker
+    - name: Install docker and other packages
       package:
         name:
           - docker.io
@@ -26,7 +30,6 @@
         version: cesnet
     - name: Config
       vars:
-        fip_hostname: "{{ lookup('dig', groups['fip'][0] + '/PTR') | regex_replace('\\.$', '') }}"
         endpoint_hostname: "{{ public_hostname | default(fip_hostname) }}"
       block:
         - name: Config strings

@@ -4,8 +4,14 @@
 [resto]
 192.168.2.49
 
+[resto-db]
+
+[apache:children]
+resto
+
 [local:children]
 resto
+resto-db
 
 [local:vars]
 ansible_become=yes
@@ -21,11 +27,11 @@ admin_email=valtri@civ.zcu.cz
 #  * docker-compose.yml
 mtu=1442
 
+# default: reverse lookup from fip
+# email_hostname=
+
 # default: fip hostname from DNS
 # public_hostname=
-
-# default: reverse lookup from fip
-# email_domain=
 
 # docker network inspect -f '{{.IPAM.Config}}' resto_default
 smtp_network=172.19.0.0/16

@@ -1,0 +1,38 @@
+---
+- hosts: apache
+
+  vars_files:
+    - playbooks/vars.yaml
+
+  tasks:
+    - name: Install apache
+      package:
+        name:
+          - apache2
+    - name: Enable apache {{ item }} module
+      apache2_module:
+        name: "{{ item }}"
+        state: present
+      with_items:
+        - proxy
+        - proxy_http
+    - name: Site file
+      template:
+        src: "files/resto.conf"
+        dest: "/etc/apache2/sites-available/resto.conf"
+      notify: Reload apache2
+    - name: Site enable
+      command:
+        cmd: a2ensite resto.conf
+        creates: /etc/apache2/sites-enabled/resto.conf
+      notify: Reload apache2
+
+  handlers:
+    - name: Reload apache2
+      service:
+        name: apache2
+        state: reloaded
+    - name: Restart apache2
+      service:
+        name: apache2
+        state: restarted
