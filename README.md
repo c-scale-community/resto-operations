@@ -13,7 +13,7 @@ Steps (control machine):
 
 Create user:
 
-    endpoint=http://147.251.124.35:5252
+    endpoint=http://127.0.0.1
     cat <<EOF > user.json
     {
       "name": "LOGIN",
