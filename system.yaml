@@ -33,7 +33,7 @@
     - name: Site setup postfix
       vars:
         main:
-          myhostname: "{{ lookup('dig', groups['fip'][0] + '/PTR') | regex_replace('\\.$', '') }}"
+          myhostname: "{{ email_hostname | default(lookup('dig', groups['fip'][0] + '/PTR') | regex_replace('\\.$', '')) }}"
           mynetworks: "127.0.0.0/8 [::ffff:127.0.0.0]/104 [::1]/128 {{ smtp_network }}"
           relayhost: relay.muni.cz
           inet_protocols: ipv4
