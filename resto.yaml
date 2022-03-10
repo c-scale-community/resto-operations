@@ -31,9 +31,12 @@
         - name: Config strings
           vars:
             config:
-              PUBLIC_ENDPOINT: "http://{{ endpoint_hostname }}:5252"
+              ACTIVATE_USER_ENDPOINT: "http://{{ endpoint_hostname }}:5252/activate/{:token:}"
               ADMIN_USER_PASSWORD: "{{ secret_admin_password }}"
+              DATABASE_HOST: "{{ groups['resto-db'][0] }}"
               JWT_PASSPHRASE: "{{ secret_jwt_passphrase }}"
+              PUBLIC_ENDPOINT: "http://{{ endpoint_hostname }}:5252"
+              RESET_PASSWORD_ENDPOINT: "http://{{ endpoint_hostname }}:5252/resetPassword/{:token:}"
               SENDMAIL_SENDER_EMAIL: "noreply@{{ fip_hostname }}"
               SENDMAIL_SMTP_HOST: "{{ smtp_host }}"
               SENDMAIL_SMTP_PORT: "{{ smtp_port }}"

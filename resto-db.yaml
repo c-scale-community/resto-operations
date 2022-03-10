@@ -1,0 +1,15 @@
+---
+- hosts: resto-db
+  tasks:
+    - name: Install postgresql
+      package:
+        name:
+          - postgresql
+    - name: Git checkout
+      git:
+        # https://github.com/jjrom/resto, master
+        repo: https://github.com/valtri/resto
+        dest: /root/resto-git
+        clone: yes
+        update: no
+        version: cesnet
