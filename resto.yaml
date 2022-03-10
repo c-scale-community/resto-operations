@@ -6,6 +6,7 @@
         name:
           - docker.io
           - docker-compose
+          - git
           - postgresql-client
     - name: Config docker MTU
       copy:

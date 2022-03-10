@@ -4,6 +4,7 @@
     - name: Install postgresql
       package:
         name:
+          - git
           - postgresql
     - name: Git checkout
       git:
