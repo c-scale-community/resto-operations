@@ -10,7 +10,6 @@
         name:
           - docker.io
           - docker-compose
-          - git
           - postgresql-client
     - name: Config docker MTU
       copy:
@@ -20,14 +19,8 @@
             "mtu": {{ mtu }}
           }
       notify: Reload docker
-    - name: Git checkout
-      git:
-        # https://github.com/jjrom/resto, master
-        repo: https://github.com/valtri/resto
-        dest: /root/resto-git
-        clone: yes
-        update: no
-        version: cesnet
+    - name: Git Repository
+      import_tasks: playbooks/git-repo.yaml
     - name: Config
       vars:
         endpoint_hostname: "{{ public_hostname | default(fip_hostname) }}"

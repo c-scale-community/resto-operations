@@ -6,14 +6,8 @@
         name:
           - git
           - postgresql
-    - name: Git checkout
-      git:
-        # https://github.com/jjrom/resto, master
-        repo: https://github.com/valtri/resto
-        dest: /root/resto-git
-        clone: yes
-        update: no
-        version: cesnet
+    - name: Git Repository
+      import_tasks: playbooks/git-repo.yaml
 # TODO: install database modules
 # read PGPASSWORD
 # PGPASSWORD="$PGPASSWORD" createdb resto

@@ -1,0 +1,13 @@
+---
+- name: Install git package
+  package:
+    name:
+      - git
+- name: Git checkout
+  git:
+    # https://github.com/jjrom/resto, master
+    repo: https://github.com/valtri/resto
+    dest: /root/resto-git
+    clone: yes
+    update: no
+    version: cesnet2
