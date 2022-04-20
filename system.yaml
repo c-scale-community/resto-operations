@@ -8,6 +8,7 @@
           - cron-apt
           - fail2ban
           - ipset
+          - ipset-persistent
           - iptables-persistent
           - less
           - mailutils
