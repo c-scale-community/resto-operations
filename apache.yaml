@@ -28,6 +28,16 @@
         cmd: a2ensite resto.conf
         creates: /etc/apache2/sites-enabled/resto.conf
       notify: Reload apache2
+    - name: Git Repository
+      import_tasks: playbooks/git-repo.yaml
+    - name: Documentation files
+      copy:
+        dest: /var/www/html/doc/{{ item }}
+        src: /root/resto-git/docs/{{ item }}
+        remote_src: true
+      with_items:
+        - resto-api.html
+        - resto-api.json
 
   handlers:
     - name: Reload apache2
