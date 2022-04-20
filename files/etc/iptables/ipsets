@@ -1,0 +1,7 @@
+create ban hash:net family inet hashsize 1024 maxelem 65536
+add ban 45.134.144.0/24
+add ban 109.237.100.0/22
+add ban 165.227.0.0/16
+add ban 178.79.128.0/18
+add ban 208.109.0.0/16
+add ban 220.192.0.0/12

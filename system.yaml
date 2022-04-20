@@ -7,6 +7,8 @@
         name:
           - cron-apt
           - fail2ban
+          - ipset
+          - iptables-persistent
           - less
           - mailutils
           - net-tools
@@ -45,6 +47,14 @@
         path: /etc/postfix/main.cf
       loop: "{{ main | dict2items }}"
       notify: Reload postfix
+    - name: iptables persistent
+      copy:
+        src: "files{{ item }}"
+        dest: "{{ item }}"
+      with_items:
+        - /etc/iptables/ipsets
+        - /etc/iptables/rules.v4
+        - /etc/iptables/rules.v6
 
   handlers:
     - name: Reload postfix
