@@ -20,6 +20,8 @@
       template:
         src: "files/resto.conf"
         dest: "/etc/apache2/sites-available/resto.conf"
+        # do not rewrite - it can be changed by certbot
+        force: no
       notify: Reload apache2
     - name: Site enable
       command:
