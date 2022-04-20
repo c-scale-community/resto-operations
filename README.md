@@ -1,3 +1,9 @@
+# Info
+
+Playbooks and operations for [Resto](https://github.com/jjrom/resto/).
+
+# Operations
+
 Steps (remote machines):
 
     apt-get update
@@ -16,15 +22,15 @@ Create user:
     endpoint=http://127.0.0.1
     cat <<EOF > user.json
     {
-      "name": "LOGIN",
+      "name": "login",
       "firstname": "First",
       "bio": "Bio",
       "lastname": "Last",
       "topics": "Topics",
-      "country": "cz",
-      "organization": "CESNET",
-      "password": "PASSWORD",
-      "email": "EMAIL@example.com"
+      "country": "au",
+      "organization": "Org",
+      "password": "password",
+      "email": "email@example.com"
     }
     EOF
     curl -i -X POST "$endpoint/users" -H 'Content-Type: application/json' -H 'Accept: application/json' -d @$(pwd)/user.json
