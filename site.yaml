@@ -2,4 +2,3 @@
 - import_playbook: apache.yaml
 - import_playbook: system.yaml
 - import_playbook: resto.yaml
-- import_playbook: resto-db.yaml
