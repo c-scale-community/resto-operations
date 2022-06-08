@@ -84,7 +84,7 @@
       listen: MTU Patch
     - name: Reconfigure resto
       debug:
-        msg: "Launch manually: cd ~/resto-git && ./deploy prod"
+        msg: "Launch manually: cd ~/resto-git && ./deploy"
     - name: Reload docker
       service:
         name: docker
