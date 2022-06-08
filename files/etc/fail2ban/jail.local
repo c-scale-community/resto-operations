@@ -1,0 +1,35 @@
+[apache-auth]
+enabled = true
+
+[apache-badbots]
+enabled = true
+
+[apache-botsearch]
+enabled = true
+
+[apache-fakegooglebot]
+enabled = true
+
+[apache-modsecurity]
+enabled = true
+
+[apache-nohome]
+enabled = true
+
+[apache-noscript]
+enabled = true
+
+[apache-overflows]
+enabled = true
+
+[apache-pass]
+enabled = true
+
+[apache-shellshock]
+enabled = true
+
+[recidive]
+enabled = true
+bantime  = 1y
+findtime = 1m
+maxretry = 2

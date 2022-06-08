@@ -56,9 +56,22 @@
         - /etc/iptables/ipsets
         - /etc/iptables/rules.v4
         - /etc/iptables/rules.v6
+    - name: Fail2ban config
+      template:
+        src: "files{{ item }}"
+        dest: "{{ item }}"
+        mode: 0644
+      with_items:
+        - /etc/fail2ban/fail2ban.local
+        - /etc/fail2ban/jail.local
+      notify: Reload fail2ban
 
   handlers:
     - name: Reload postfix
       service:
         name: postfix
+        state: reloaded
+    - name: Reload fail2ban
+      service:
+        name: fail2ban
         state: reloaded
