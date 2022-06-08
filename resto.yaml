@@ -18,6 +18,7 @@
           {
             "mtu": {{ mtu }}
           }
+        mode: 0644
       notify: Reload docker
     - name: Git Repository
       import_tasks: playbooks/git-repo.yaml
