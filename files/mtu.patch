@@ -1,0 +1,32 @@
+commit 156741eae079732f07325310a482853811024e75
+Author: František Dvořák <valtri@civ.zcu.cz>
+Date:   Mon Jan 31 12:26:08 2022 +0100
+
+    CESNET: lower MTU
+
+diff --git a/docker-compose-restodb.yml b/docker-compose-restodb.yml
+index 12b1046..cd388c2 100644
+--- a/docker-compose-restodb.yml
++++ b/docker-compose-restodb.yml
+@@ -5,6 +5,8 @@ volumes:
+ networks:
+   default:
+     driver: bridge
++    driver_opts:
++      com.docker.network.driver.mtu: {{ mtu }}
+   external:
+     external: true
+     name: rnet
+diff --git a/docker-compose.yml b/docker-compose.yml
+index a150f6d..a7d82a4 100644
+--- a/docker-compose.yml
++++ b/docker-compose.yml
+@@ -7,6 +7,8 @@ volumes:
+ networks:
+   default:
+     driver: bridge
++    driver_opts:
++      com.docker.network.driver.mtu: {{ mtu }}
+   external:
+     external: true
+     name: rnet

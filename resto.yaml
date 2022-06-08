@@ -22,6 +22,14 @@
       notify: Reload docker
     - name: Git Repository
       import_tasks: playbooks/git-repo.yaml
+    - name: Prepare MTU Patch
+      template:
+        src: files/mtu.patch
+        dest: /root/resto-git/mtu.patch
+        mode: 0644
+      notify:
+        - MTU Patch
+        - Reconfigure resto
     - name: Config
       vars:
         endpoint_hostname: "{{ public_hostname | default(fip_hostname) }}"
@@ -61,6 +69,19 @@
           notify: Reconfigure resto
 
   handlers:
+    - name: Revert MTU Patch
+      command:
+        chdir: /root/resto-git
+        # noqa 303
+        cmd: git checkout docker-compose-restodb.yml docker-compose.yml
+      listen: MTU Patch
+    - name: Apply MTU Patch
+      patch:
+        basedir: /root/resto-git
+        remote_src: true
+        src: /root/resto-git/mtu.patch
+        strip: 1
+      listen: MTU Patch
     - name: Reconfigure resto
       debug:
         msg: "Launch manually: cd ~/resto-git && ./deploy prod"

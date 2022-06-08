@@ -5,9 +5,8 @@
       - git
 - name: Git checkout
   git:
-    # https://github.com/jjrom/resto, master
-    repo: https://github.com/valtri/resto
+    repo: https://github.com/jjrom/resto
     dest: /root/resto-git
     clone: yes
     update: no
-    version: cesnet2
+    version: 9ea80e312d161dae45c8c2e6de9b24e711e0a28b
