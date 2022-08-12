@@ -31,7 +31,8 @@
     - name: Site cron-apt action
       copy:
         dest: /etc/cron-apt/action.d/9-upgrade
-        content: -q -q dist-upgrade
+        content: |
+          -q -q dist-upgrade
         mode: 0644
     - name: Site setup postfix
       vars:
