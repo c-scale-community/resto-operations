@@ -30,6 +30,11 @@
       notify: Reload apache2
     - name: Git Repository
       import_tasks: playbooks/git-repo.yaml
+    - name: Documentation directory
+      file:
+        path: /var/www/html/doc
+        state: directory
+        mode: 0755
     - name: Documentation files
       copy:
         dest: /var/www/html/doc/{{ item }}
