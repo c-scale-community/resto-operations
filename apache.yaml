@@ -22,6 +22,7 @@
         dest: "/etc/apache2/sites-available/resto.conf"
         # do not rewrite - it can be changed by certbot
         force: no
+        mode: 0644
       notify: Reload apache2
     - name: Site enable
       command:
@@ -40,6 +41,7 @@
         dest: /var/www/html/doc/{{ item }}
         src: /root/resto-git/docs/{{ item }}
         remote_src: true
+        mode: 0644
       with_items:
         - resto-api.html
         - resto-api.json

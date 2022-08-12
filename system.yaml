@@ -52,6 +52,7 @@
       copy:
         src: "files{{ item }}"
         dest: "{{ item }}"
+        mode: 0644
       with_items:
         - /etc/iptables/ipsets
         - /etc/iptables/rules.v4
