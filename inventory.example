@@ -29,6 +29,8 @@ mtu=1442
 
 # default: reverse lookup from fip
 # email_hostname=
+# email_relayhost=
+# email_protocols=all
 
 # default: fip hostname from DNS
 # public_hostname=
