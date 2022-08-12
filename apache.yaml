@@ -16,6 +16,7 @@
       with_items:
         - proxy
         - proxy_http
+      notify: Restart apache2
     - name: Site file
       template:
         src: "files/resto.conf"
@@ -29,6 +30,10 @@
         cmd: a2ensite resto.conf
         creates: /etc/apache2/sites-enabled/resto.conf
       notify: Reload apache2
+    - name: Default site disable
+      command:
+        cmd: a2dissite 000-default
+        removes: /etc/apache2/sites-enabled/000-default.conf
     - name: Git Repository
       import_tasks: playbooks/git-repo.yaml
     - name: Documentation directory
