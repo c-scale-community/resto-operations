@@ -17,6 +17,9 @@ Steps (control machine):
     #vim inventory
     ansible-playbook ./site.yaml
 
+    # setup SSL
+    #sh -xe ./HOWTO-certbot.sh
+
 Create user:
 
     endpoint=http://127.0.0.1
