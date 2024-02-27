@@ -11,6 +11,9 @@ Steps (remote machines):
 
 Steps (control machine):
 
+    # when using credentials from vault
+    . ./vault-login-egi.sh
+
     apt-get install -y python3-dnspython
     cp inventory.example inventory
     # modify
