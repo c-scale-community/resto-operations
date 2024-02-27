@@ -1,13 +1,13 @@
-commit 156741eae079732f07325310a482853811024e75
+commit f4b1ece7555ad175496a06e5233455db36299b57
 Author: František Dvořák <valtri@civ.zcu.cz>
-Date:   Mon Jan 31 12:26:08 2022 +0100
+Date:   Tue Feb 27 17:14:44 2024 +0100
 
     CESNET: lower MTU
 
-diff --git a/docker-compose-restodb.yml b/docker-compose-restodb.yml
-index 12b1046..cd388c2 100644
---- a/docker-compose-restodb.yml
-+++ b/docker-compose-restodb.yml
+diff --git a/docker-compose.api.yml b/docker-compose.api.yml
+index ccd0263..60ba747 100644
+--- a/docker-compose.api.yml
++++ b/docker-compose.api.yml
 @@ -5,6 +5,8 @@ volumes:
  networks:
    default:
@@ -16,9 +16,16 @@ index 12b1046..cd388c2 100644
 +      com.docker.network.driver.mtu: {{ mtu }}
    external:
      external: true
-     name: rnet
+     name: rnet 
+@@ -32,4 +34,4 @@ services:
+       interval: 1m
+       timeout: 5s
+     volumes:
+-      - static_content:/var/www/static
+\ No newline at end of file
++      - static_content:/var/www/static
 diff --git a/docker-compose.yml b/docker-compose.yml
-index a150f6d..a7d82a4 100644
+index a978a90..c9944ee 100644
 --- a/docker-compose.yml
 +++ b/docker-compose.yml
 @@ -7,6 +7,8 @@ volumes:
@@ -29,4 +36,11 @@ index a150f6d..a7d82a4 100644
 +      com.docker.network.driver.mtu: {{ mtu }}
    external:
      external: true
-     name: rnet
+     name: rnet 
+@@ -55,4 +57,4 @@ services:
+       timeout: 5s
+     volumes:
+       - database_data:/var/lib/postgresql/data
+-      - ./postgresql-conf/postgresql.conf:/etc/postgresql.conf
+\ No newline at end of file
++      - ./postgresql-conf/postgresql.conf:/etc/postgresql.conf
