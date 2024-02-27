@@ -14,15 +14,21 @@
         name: "{{ item }}"
         state: present
       with_items:
+        - md
         - proxy
         - proxy_http
+        - ssl
       notify: Restart apache2
+    - name: MD config file
+      template:
+        src: "files/etc/apache2/conf-enabled/md-resto.conf"
+        dest: "/etc/apache2/conf-enabled/md-resto.conf"
+        mode: 0644
+      notify: Reload apache2
     - name: Site file
       template:
-        src: "files/resto.conf"
+        src: "files/etc/apache2/sites-available/resto.conf"
         dest: "/etc/apache2/sites-available/resto.conf"
-        # do not rewrite - it can be changed by certbot
-        force: no
         mode: 0644
       notify: Reload apache2
     - name: Site enable
