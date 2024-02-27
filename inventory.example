@@ -4,14 +4,14 @@
 [resto]
 192.168.2.49
 
-[resto-db]
+[resto_db]
 
 [apache:children]
 resto
 
 [local:children]
 resto
-resto-db
+resto_db
 
 [local:vars]
 ansible_become=yes

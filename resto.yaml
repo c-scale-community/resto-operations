@@ -39,7 +39,7 @@
             config:
               ACTIVATE_USER_ENDPOINT: "https://{{ endpoint_hostname }}/activate/{:token:}"
               ADMIN_USER_PASSWORD: "{{ secret_admin_password }}"
-              DATABASE_HOST: "{{ groups['resto-db'][0] | default('restodb') }}"
+              DATABASE_HOST: "{{ groups['resto_db'][0] | default('restodb') }}"
               DATABASE_USER_PASSWORD: "{{ secret_db_password | default('resto') }}"
               JWT_PASSPHRASE: "{{ secret_jwt_passphrase }}"
               PUBLIC_ENDPOINT: "https://{{ endpoint_hostname }}"
