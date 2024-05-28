@@ -22,6 +22,9 @@ ansible_ssh_common_args='-o ProxyCommand="ssh -o StrictHostKeyChecking=no -o Use
 
 admin_email=valtri@civ.zcu.cz
 
+# for SSL certificate
+# apache_md=true
+
 # keep in sync with:
 #  * docker-compose-restodb.yml
 #  * docker-compose.yml
