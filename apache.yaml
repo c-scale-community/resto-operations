@@ -41,6 +41,17 @@
         force: no
         mode: 0644
       notify: Reload apache2
+    - name: SSL protocols config file
+      template:
+        src: "files/etc/apache2/conf-available/ssl-protocols.conf"
+        dest: "/etc/apache2/conf-available/ssl-protocols.conf"
+        mode: 0644
+      notify: Reload apache2
+    - name: SSL protocols config enable
+      command:
+        cmd: a2enconf ssl-protocols
+        creates: /etc/apache2/conf-enabled/ssl-protocols.conf
+      notify: Reload apache2
     - name: Site enable
       command:
         cmd: a2ensite resto.conf
