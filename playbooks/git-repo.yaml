@@ -9,4 +9,4 @@
     dest: /root/resto-git
     clone: yes
     update: no
-    version: v7.0.4
+    version: v9.6.0

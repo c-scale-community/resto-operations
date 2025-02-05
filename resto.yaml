@@ -73,7 +73,7 @@
       command:
         chdir: /root/resto-git
         # noqa 303
-        cmd: git checkout docker-compose-restodb.yml docker-compose.yml
+        cmd: git checkout docker-compose.api.yml docker-compose.yml
       listen: MTU Patch
     - name: Apply MTU Patch
       patch:
