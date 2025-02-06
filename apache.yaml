@@ -63,20 +63,6 @@
         removes: /etc/apache2/sites-enabled/000-default.conf
     - name: Git Repository
       import_tasks: playbooks/git-repo.yaml
-    - name: Documentation directory
-      file:
-        path: /var/www/html/doc
-        state: directory
-        mode: 0755
-    - name: Documentation files
-      copy:
-        dest: /var/www/html/doc/{{ item }}
-        src: /root/resto-git/docs/{{ item }}
-        remote_src: true
-        mode: 0644
-      with_items:
-        - resto-api.html
-        - resto-api.json
 
   handlers:
     - name: Reload apache2
