@@ -1,0 +1,13 @@
+diff --git a/app/resto/core/RestoRouter.php b/app/resto/core/RestoRouter.php
+index 5b7020ad..261b59e9 100755
+--- a/app/resto/core/RestoRouter.php
++++ b/app/resto/core/RestoRouter.php
+@@ -104,6 +104,8 @@ class RestoRouter
+         array('GET',    RestoRouter::ROUTE_TO_AUTH . '/create', true, 'AuthAPI::createToken'),                                          // Return a valid auth token
+         array('GET',    RestoRouter::ROUTE_TO_AUTH . '/check/{token}', false, 'AuthAPI::checkToken'),                                   // Check auth token validity
+         array('DELETE', RestoRouter::ROUTE_TO_AUTH . '/revoke/{token}', true, 'AuthAPI::revokeToken'),                                  // Revoke auth token
++        // make a click work
++        array('GET',    RestoRouter::ROUTE_TO_AUTH . '/activate/{token}', false, 'AuthAPI::activateUser'),                              // Activate owner of the token
+         array('PUT',    RestoRouter::ROUTE_TO_AUTH . '/activate/{token}', false, 'AuthAPI::activateUser'),                              // Activate owner of the token
+ 
+         // API for services
