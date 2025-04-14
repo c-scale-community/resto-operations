@@ -2,7 +2,7 @@
 
 Playbooks and operations for [Resto](https://github.com/jjrom/resto/).
 
-# Operations
+## Operations
 
 Steps (remote machines):
 
@@ -20,15 +20,12 @@ Steps (control machine):
     #vim inventory
     ansible-playbook ./site.yaml
 
-    # setup SSL
-    #sh -xe ./HOWTO-certbot.sh
-
 Create user:
 
-    endpoint=http://127.0.0.1
+    endpoint=https://127.0.0.1
     cat <<EOF > user.json
     {
-      "name": "login",
+      "username": "login",
       "firstname": "First",
       "bio": "Bio",
       "lastname": "Last",
@@ -39,12 +36,20 @@ Create user:
       "email": "email@example.com"
     }
     EOF
-    curl -i -X POST "$endpoint/users" -H 'Content-Type: application/json' -H 'Accept: application/json' -d @$(pwd)/user.json
+    curl -k -i -X POST "$endpoint/users" -H 'Content-Type: application/json' -H 'Accept: application/json' -d @$(pwd)/user.json
 
-    token="$(curl -i -X GET -u EMAIL@example.com:PASSWOD "$endpoint/auth" -H 'Accept: application/json' | jq -r .token)"
+    # local activation (by admin)
+    read token
+    curl -k -i -X PUT "$endpoint/auth/activate/$token" -H 'Accept: application/json'
 
-    curl -i -X PUT "$endpoint/auth/activate/$token" -H 'Accept: application/json'
+Adding users to the groups:
 
-Complete cleanup of all users:
+    endpoint=https://example.com
+    user=exampleuser
+    group=xxx
+    read authadmin
+    curl -i -u "$authadmin" -X POST "$endpoint/groups/$group/users" -H 'Content-Type: application/json' -d"{\"username\":\"$user\"}"
 
-    docker exec -it resto_restodb_1 psql -U resto resto -c "DELETE FROM \"user\" WHERE email!='admin'"
+## Work directly with the database
+
+    docker exec -it resto-git-restodb-1 psql -U resto resto
