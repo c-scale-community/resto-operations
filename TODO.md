@@ -14,3 +14,7 @@ A hack to make the activation work using browser.
     patch -p1 < ../activate.patch
 
 Note, the proper way would be something different - a wrapper using forms and buttons.
+
+## API Documentation
+
+Check version in *docs/api/resto-api.\**.
