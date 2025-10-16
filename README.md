@@ -64,3 +64,7 @@ Adding users to the groups:
 ## Work directly with the database
 
     docker exec -it resto-git-restodb-1 psql -U resto resto
+
+Dump users:
+
+    docker exec resto-git-restodb-1 pg_dump -U resto resto --clean --schema resto --table 'group*|right*|user*' >db-users.sql
