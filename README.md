@@ -23,7 +23,7 @@ Steps (control machine):
 Create user:
 
     endpoint=https://127.0.0.1
-    cat <<EOF > user.json
+    cat <<EOF >user.json
     {
       "username": "login",
       "firstname": "First",
@@ -41,6 +41,17 @@ Create user:
     # local activation (by admin)
     read token
     curl -k -i -X PUT "$endpoint/auth/activate/$token" -H 'Accept: application/json'
+
+Modify user:
+
+	cat <<EOF >mod.json
+	{
+	  "password": "better-password"
+	}
+	EOF
+	user=exampleuser
+    read authadmin
+    curl -k -i -u "$authadmin" -X POST "$endpoint/users/$user" -H 'Content-Type: application/json' -H 'Accept: application/json' -d @$(pwd)/user.json
 
 Adding users to the groups:
 
